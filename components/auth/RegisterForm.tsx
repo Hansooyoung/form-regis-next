@@ -1,6 +1,6 @@
     'use client';
 
-    import { useState, useCallback } from 'react';
+    import { useState, useCallback, ChangeEvent } from 'react';
     import { useRouter } from 'next/navigation';
     import { getProvinces, getRegencies, getDistricts, getVillages } from '@/services/regionService';
     import { saveUserData } from '@/utils/storage';
@@ -28,6 +28,25 @@
     const [dataValid, setDataValid] = useState(false);
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [showPassword, setShowPassword] = useState(false);
+
+    const handleNumberInputChange = useCallback(
+        (e: ChangeEvent<HTMLInputElement>) => {
+          const { name, value } = e.target;
+      
+          if (/^\d*$/.test(value) || value === '') {
+            setFormData(prev => ({ ...prev, [name]: value }));
+            
+            if (errors[name]) {
+              setErrors(prev => {
+                const newErrors = { ...prev };
+                delete newErrors[name];
+                return newErrors;
+              });
+            }
+          }
+        },
+        [errors]
+      );
 
     const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -66,6 +85,7 @@
     
     const getVillagesMemoized = useCallback(() => 
         getVillages(formData.district), [formData.district]);
+
     const validateForm = () => {
         const newErrors: Record<string, string> = {};
         const requiredFields = [
@@ -190,7 +210,7 @@
             name="nik"
             placeholder='NIK 16 Digit'
             value={formData.nik}
-            onChange={handleChange}
+            onChange={handleNumberInputChange}
             className={`mt-1 block w-full border ${errors.nik ? 'border-red-500' : 'border-gray-300'}  text-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
             />
             {errors.nik && <p className="mt-1 text-sm text-red-600">{errors.nik}</p>}
@@ -206,7 +226,7 @@
             name="phone"
             placeholder='No Handphone'
             value={formData.phone}
-            onChange={handleChange}
+            onChange={handleNumberInputChange}
             className={`mt-1 block w-full border ${errors.phone ? 'border-red-500' : 'border-gray-300'}  text-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
             />
             {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone}</p>}
@@ -278,7 +298,7 @@
                 name="rt"
                 placeholder='RT'
                 value={formData.rt}
-                onChange={handleChange}
+                onChange={handleNumberInputChange}
                 className={`mt-1 block w-full border ${errors.rt ? 'border-red-500' : 'border-gray-300'}  text-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
             />
             {errors.rt && <p className="mt-1 text-sm text-red-600">{errors.rt}</p>}
@@ -294,7 +314,7 @@
                 name="rw"
                 placeholder='RW'
                 value={formData.rw}
-                onChange={handleChange}
+                onChange={handleNumberInputChange}
                 className={`mt-1 block w-full border ${errors.rw ? 'border-red-500' : 'border-gray-300'}  text-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
             />
             {errors.rw && <p className="mt-1 text-sm text-red-600">{errors.rw}</p>}
@@ -311,7 +331,7 @@
             name="postalCode"
                 placeholder='Kode Pos Opsional'
             value={formData.postalCode}
-            onChange={handleChange}
+            onChange={handleNumberInputChange}
             className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm  text-gray-700"
             />
         </div>
