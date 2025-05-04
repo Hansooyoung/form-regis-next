@@ -1,21 +1,23 @@
-import api from './api';
+import axios from 'axios';
+
+const API_BASE = '/api/wilayah';
 
 export const getProvinces = async () => {
-  const response = await api.get('/provinces.json');
-  return response.data;
+  const response = await axios.get(`${API_BASE}/provinces`);
+  return response.data.data;
 };
 
 export const getRegencies = async (provinceCode: string) => {
-  const response = await api.get(`/regencies/${provinceCode}.json`);
-  return response.data;
+  const response = await axios.get(`${API_BASE}/regencies/${provinceCode}`);
+  return response.data.data;
 };
 
 export const getDistricts = async (regencyCode: string) => {
-  const response = await api.get(`/districts/${regencyCode}.json`);
-  return response.data;
+  const response = await axios.get(`${API_BASE}/districts/${regencyCode}`);
+  return response.data.data;
 };
 
 export const getVillages = async (districtCode: string) => {
-  const response = await api.get(`/villages/${districtCode}.json`);
-  return response.data;
+  const response = await axios.get(`${API_BASE}/villages/${districtCode}`);
+  return response.data.data;
 };
