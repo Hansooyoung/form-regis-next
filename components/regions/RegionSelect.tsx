@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+// components/regions/RegionSelect.tsx
+import { useEffect, useState, memo } from 'react';
 
 interface Region {
   code: string;
@@ -14,7 +15,7 @@ interface RegionSelectProps {
   required?: boolean;
 }
 
-export default function RegionSelect({
+function RegionSelectComponent({
   label,
   value,
   onChange,
@@ -33,11 +34,7 @@ export default function RegionSelect({
         setError(null);
         try {
           const data = await fetchData();
-          if (Array.isArray(data)) {
-            setOptions(data);
-          } else {
-            throw new Error('Invalid data format received');
-          }
+          setOptions(Array.isArray(data) ? data : []);
         } catch (err) {
           setError('Gagal memuat data. Silakan coba lagi.');
           console.error(`Error loading ${label}:`, err);
@@ -59,14 +56,13 @@ export default function RegionSelect({
       
       <select
         id={label.toLowerCase()}
-        name={label.toLowerCase()}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         disabled={disabled || loading}
         required={required}
         className={`mt-1 block w-full pl-3 pr-10 py-2 text-base border ${
           error ? 'border-red-500' : 'border-gray-300'
-        } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+        } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-700`}
       >
         <option value="">Pilih {label}</option>
         {loading ? (
@@ -98,3 +94,5 @@ export default function RegionSelect({
     </div>
   );
 }
+
+export const RegionSelect = memo(RegionSelectComponent);
