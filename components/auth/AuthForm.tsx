@@ -7,7 +7,10 @@ interface AuthFormProps {
 
 export default function AuthForm({ children, onSubmit }: AuthFormProps) {
   return (
-    <form className="space-y-4 md:space-y-6" onSubmit={onSubmit}>
+    <form 
+      className="space-y-4 md:space-y-6" 
+      onSubmit={onSubmit}
+    >
       {children}
     </form>
   );
