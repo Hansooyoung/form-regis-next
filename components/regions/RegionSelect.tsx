@@ -2,8 +2,6 @@
 import { Region } from '@/types/types';
 import { useEffect, useState, memo } from 'react';
 
-
-
 interface RegionSelectProps {
   label: string;
   value: string;
@@ -40,6 +38,9 @@ function RegionSelectComponent({
         } finally {
           setLoading(false);
         }
+      } else {
+        // Reset options ketika disabled
+        setOptions([]);
       }
     };
 
@@ -60,7 +61,7 @@ function RegionSelectComponent({
         required={required}
         className={`mt-1 block w-full pl-3 pr-10 py-2 text-base border ${
           error ? 'border-red-500' : 'border-gray-300'
-        } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-700`}
+        } ${disabled ? 'bg-gray-100 cursor-not-allowed' : ''} rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-700`}
       >
         <option value="">Pilih {label}</option>
         {loading ? (
@@ -78,7 +79,7 @@ function RegionSelectComponent({
 
       {error && (
         <p className="mt-1 text-sm text-red-600">
-          {error} {!loading && (
+          {error} {!loading && !disabled && (
             <button 
               type="button" 
               onClick={() => window.location.reload()}
