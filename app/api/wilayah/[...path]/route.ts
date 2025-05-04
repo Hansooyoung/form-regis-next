@@ -28,10 +28,13 @@ export async function GET(
     });
   } catch (error) {
     return NextResponse.json(
-      { error: 'Failed to fetch data' },
+      { 
+        error: 'Failed to fetch data',
+        message: error instanceof Error ? error.message : 'Unknown error' // Gunakan error
+      },
       { status: 500 }
     );
-  }
+}
 }
 
 export async function OPTIONS() {

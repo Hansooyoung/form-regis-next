@@ -128,6 +128,7 @@ export default function RegisterForm() {
           id="fullName"
           name="fullName"
           value={formData.fullName}
+          placeholder='Nama Lengkap'
           onChange={handleChange}
           className={`mt-1 block w-full border ${errors.fullName ? 'border-red-500' : 'border-gray-300'}  text-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
         />
@@ -143,6 +144,7 @@ export default function RegisterForm() {
             type={showPassword ? "text" : "password"}
             id="password"
             name="password"
+            placeholder='Password Minimal 8 Karakter'
             value={formData.password}
             onChange={handleChange}
             className={`mt-1 block w-full border ${errors.password ? 'border-red-500' : 'border-gray-300'}  text-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
@@ -170,6 +172,7 @@ export default function RegisterForm() {
           type="email"
           id="email"
           name="email"
+          placeholder='Email'
           value={formData.email}
           onChange={handleChange}
           className={`mt-1 block w-full border ${errors.email ? 'border-red-500' : 'border-gray-300'}  text-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
@@ -185,6 +188,7 @@ export default function RegisterForm() {
           type="text"
           id="nik"
           name="nik"
+          placeholder='NIK 16 Digit'
           value={formData.nik}
           onChange={handleChange}
           className={`mt-1 block w-full border ${errors.nik ? 'border-red-500' : 'border-gray-300'}  text-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
@@ -200,6 +204,7 @@ export default function RegisterForm() {
           type="tel"
           id="phone"
           name="phone"
+          placeholder='No Handphone'
           value={formData.phone}
           onChange={handleChange}
           className={`mt-1 block w-full border ${errors.phone ? 'border-red-500' : 'border-gray-300'}  text-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
@@ -214,6 +219,7 @@ export default function RegisterForm() {
         <textarea
           id="address"
           name="address"
+          placeholder='Alamat Lengkap'
           value={formData.address}
           onChange={handleChange}
           rows={3}
@@ -222,7 +228,6 @@ export default function RegisterForm() {
         {errors.address && <p className="mt-1 text-sm text-red-600">{errors.address}</p>}
       </div>
 
-         {/* RegionSelect yang sudah dioptimasi */}
          <RegionSelect
         label="Provinsi"
         value={formData.province}

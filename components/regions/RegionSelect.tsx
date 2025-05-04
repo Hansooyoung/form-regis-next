@@ -1,10 +1,8 @@
 // components/regions/RegionSelect.tsx
+import { Region } from '@/types/types';
 import { useEffect, useState, memo } from 'react';
 
-interface Region {
-  code: string;
-  name: string;
-}
+
 
 interface RegionSelectProps {
   label: string;
