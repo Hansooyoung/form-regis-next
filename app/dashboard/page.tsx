@@ -3,9 +3,10 @@
 import { useEffect, useState } from 'react';
 import { getUserData } from '@/utils/storage';
 import AuthLayout from '@/components/auth/AuthLayout';
+import { UserData } from '@/types/types';
 
 export default function DashboardPage() {
-  const [userData, setUserData] = useState<any>(null);
+  const [userData, setUserData] = useState<UserData | null>(null);
 
   useEffect(() => {
     const data = getUserData();
